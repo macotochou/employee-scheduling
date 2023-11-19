@@ -30,10 +30,13 @@ def employee_preferences():
     preferences = { "Anna": [1,2,3,4],
                     "Bill": [3,2,1,4],
                     "Chris": [4,2,3,1],
-                    "Diane": [4,1,2,3]}
+                    "Diane": [4,1,2,3],}
 
     # TODO: Add additional employees with preferences
-
+    preferences["Erik"] = [1,3,2,4]
+    preferences["Francis"] = [4,3,2,1]
+    preferences["Greta"] = [2,1,4,3]
+    preferences["Harry"] = [3,2,1,4]
     return preferences
 
 
@@ -102,6 +105,7 @@ if __name__ == "__main__":
     sampler = set_sampler()
 
     sampleset = solve_problem(cqm, sampler)
+    # print(sampleset)
 
     shift_schedule = process_sampleset(sampleset)
 

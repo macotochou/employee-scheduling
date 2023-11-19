@@ -61,9 +61,18 @@ def build_cqm():
         cqm.objective.add_linear_from([*zip(labels, preference)])
 
     # TODO: Restrict Anna from working shift 4
-
+    cqm.add_constraint_from_iterable([("x_Anna_3", 1)], "==", 0)
     # TODO: Set constraints to reflect the restrictions in the README.
+    for i in range(num_shifts):
+        # cqm.add_constraint_from_iterable([(f"x_Bill_{i}", 1), (f"x_Frank_{i}", 1)], "<=", 1)
+        cqm.add_constraint_from_iterable([(f"x_Bill_{i}", f"x_Frank_{i}", 1)], "==", 0)
 
+        # cqm.add_constraint_from_iterable([(f"x_Erica_{i}", -1), (f"x_Harriet_{i}", -1), (f"x_Erica_{i}", f"x_Harriet_{i}", 2)], "==", 0)
+        cqm.add_constraint_from_iterable([(f"x_Erica_{i}", 1), (f"x_Harriet_{i}", -1)], "==", 0)
+
+        # A1 + B1 + C1 + D1 + E1 + F1 + G1 + H1 == 2
+        cqm.add_constraint_from_iterable([(f"x_{name}_{i}", 1) for name in preferences], "==", 2)
+    
     return cqm
 
 # Solve the problem

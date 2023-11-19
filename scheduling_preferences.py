@@ -48,7 +48,7 @@ def build_cqm():
     for employee, preference in preferences.items():
         # Create labels for binary variables
         labels = [f"x_{employee}_{shift}" for shift in range(num_shifts)]
-    
+
         # Add a discrete constraint over employee binaries
         cqm.add_discrete(labels, label=f"discrete_{employee}")
 
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     sampler = set_sampler()
 
     sampleset = solve_problem(cqm, sampler)
-
+    # print(sampleset)
     # Get the first solution, and print it
     sample = sampleset.first.sample
     energy = sampleset.first.energy
